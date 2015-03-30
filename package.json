@@ -1,26 +1,20 @@
 {
-    "name": "watch",
+    "name": "ReactSelector",
     "author": "João Valente",
+    "main": "lib/ReactSelector.js",
     "repository" : {
         "type" : "git",
         "url" : ""
     },
     "devDependencies": {
-        "watchify": "^2.1.1",
-        "coffee-watcher": "jvalente/coffee-watcher",
-        "browserify": "latest",
-        "uglify-js": "latest"
+        "coffee-script": "^1.9.1",
+        "browserify": "^9.0.3"
     },
     "dependencies": {
-        "react": "latest"
+        "react": "0.13.0"
     },
     "scripts": {
-        "watch-coffee" : "coffee-watcher -d js",
-        "watch-js": "watchify -o ./js/bundle.js -vd ./js/.coffee.app.js",
-        "start": "npm run watch-coffee & npm run watch-js",
-        "browserify": "browserify -o ./js/bundle.js ./js.coffee.app.js",
-        "uglify": "uglifyjs ./js/bundle.js -cm -o ./js/bundle.min.js",
-        "build": "npm run browserify & npm run uglify"
-
+        "coffee": "./node_modules/coffee-script/bin/coffee -o lib/ -c src/ReactSelector.coffee ",
+        "build": "npm run coffee"
     }
 }

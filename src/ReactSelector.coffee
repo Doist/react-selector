@@ -5,9 +5,10 @@
 #   through an input field.
 #
 # # Expects props:
-#   - @universe:    An array with all the items we can select from
-#   - @selected:    An array with the selected items.
-#   - @compare:     A compare function that is used to order items.
+#   - @filtered_items_on_top (optional)     true if the filtered items should appear on top of the filter input
+#   - @universe:                            An array with all the items we can select from
+#   - @selected:                            An array with the selected items.
+#   - @compare:                             A compare function that is used to order items.
 #
 # # Anathomy of an item.
 #   universe and selected array must be populated with `items` that respect
@@ -41,6 +42,7 @@ ReactSelector = React.createClass
     getInitialState: ->
         query = ""
         return {
+            filtered_items_on_top: @props.filtered_items_on_top || false
             show_filtered_items: false
             query: query
             active_item_index: 0
@@ -224,6 +226,7 @@ ReactSelector = React.createClass
             @setState { show_filtered_items: false }
         ), 200
 
+
     #
     #
     #
@@ -231,11 +234,14 @@ ReactSelector = React.createClass
         filtered_items = @_getItems(@state.filtered, true)
         selected_items = @_getItems(@props.selected)
 
+        filtered_items_section =
+            React.DOM.div {className: "universe"},
+                React.DOM.div {className: "container"},
+                    filtered_items
+
         React.DOM.div {},
-            if @state.show_filtered_items
-                React.DOM.div {className: "universe"},
-                    React.DOM.div {className: "container"},
-                        filtered_items
+            if @state.show_filtered_items && @state.filtered_items_on_top
+                filtered_items_section
 
             React.DOM.div {className: "selected"},
                 React.DOM.div {className: "container"},
@@ -249,5 +255,8 @@ ReactSelector = React.createClass
                         onFocus: @_showFilteredItems
                         onBlur: @_hideFilteredItems
                     }
+
+            if @state.show_filtered_items && !@state.filtered_items_on_top
+                filtered_items_section
 
 module.exports = ReactSelector

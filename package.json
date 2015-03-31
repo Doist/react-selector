@@ -1,11 +1,13 @@
 {
     "name": "react-selector",
-    "author": "João Valente",
     "version": "0.0.2",
+    "description": "A React component that allows to filter and move item between two lists.",
+    "author": "João Valente <joao@doist.io> (http://doist.io)",
+    "homepage": "http://jvalente.github.io/react-selector-demo/",
     "main": "lib/ReactSelector.js",
     "repository" : {
         "type" : "git",
-        "url" : ""
+        "url" : "https://github.com/jvalente/react-selector"
     },
     "devDependencies": {
         "coffee-script": "^1.9.1",
@@ -14,6 +16,19 @@
     "dependencies": {
         "react": "0.13.0"
     },
+    "tags": [
+        "react",
+        "selector"
+    ],
+    "keywords": [
+        "react",
+        "react-component",
+        "react-selector",
+        "lists",
+        "select",
+        "selector",
+        "picker"
+    ],
     "scripts": {
         "coffee": "./node_modules/coffee-script/bin/coffee -o lib/ -c src/ReactSelector.coffee ",
         "build": "npm run coffee"

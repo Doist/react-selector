@@ -89,10 +89,9 @@ ReactSelector = React.createClass
 
         for item in universe
             if !@__arrayContainsObject(selected, item)
-                if item.name.toLowerCase().trim().indexOf(query) != -1
+                if item.name.toLowerCase().trim().indexOf(query.toLowerCase().trim()) != -1
                     filtered.push(item)
 
-        filtered.sort(@props.compare)
         return filtered
 
 

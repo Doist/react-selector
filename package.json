@@ -1,6 +1,7 @@
 {
     "name": "ReactSelector",
     "author": "João Valente",
+    "version": "0.0.1",
     "main": "lib/ReactSelector.js",
     "repository" : {
         "type" : "git",

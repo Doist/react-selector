@@ -74,9 +74,9 @@ ReactSelector = React.createClass
     #
     # Moves the active item on filter list into view
     #
-    # componentDidUpdate: ->
-    #     if @refs.active
-    #         @refs.active.getDOMNode().scrollIntoView(false)
+    componentDidUpdate: ->
+        if @refs.active
+            @refs.active.getDOMNode().scrollIntoView(false)
 
 
     #
@@ -126,6 +126,8 @@ ReactSelector = React.createClass
 
             items.push(
                 React.DOM.div({
+                        ref: "active" if is_active_item
+                        key: item.id
                         onClick: @_onItemToggle.bind(null, item)
                         className: item_class_name
                     },

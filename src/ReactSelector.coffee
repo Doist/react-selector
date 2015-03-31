@@ -107,13 +107,17 @@ ReactSelector = React.createClass
 
 
     #
-    # given a list of items, returns them ready to be rendered by react.
-    # (in this case, gets them DIV wrapped)
+    # given a list of items, returns them sorted based on @props.compare()
+    # and ready to be rendered by react. (in this case, gets them DIV wrapped)
     #
     _getItems: (list, filtering=false) ->
         items = []
+        special_items = []
 
-        for item, i in list
+        sorted_list = [].concat(list)
+        sorted_list.sort(@props.compare)
+
+        for item, i in sorted_list
             item_class_name = "item"
             is_active_item = @state.active_item_index == i
 
@@ -187,7 +191,7 @@ ReactSelector = React.createClass
     _processQuery: (event) ->
         @_showFilteredItems()
         input = event.target
-        query = input.value.trim()
+        query = input.value
 
         return if query == @state.query
 

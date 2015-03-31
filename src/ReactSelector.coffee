@@ -47,8 +47,8 @@ ReactSelector = React.createClass
             query: query
             active_item_index: 0
             filtered: @_calculateFiltered(@props.universe, @props.selected, query)
+            selected: [].concat(@props.selected).sort(@props.compare)
         }
-
 
     #
     # When receiving new props, will:
@@ -67,6 +67,7 @@ ReactSelector = React.createClass
             active_item_index: active_item_index
             query: query
             filtered: filtered
+            selected: selected.sort(@props.compare)
         }
 
 
@@ -92,6 +93,7 @@ ReactSelector = React.createClass
                 if item.name.toLowerCase().trim().indexOf(query.toLowerCase().trim()) != -1
                     filtered.push(item)
 
+        filtered.sort(@props.compare)
         return filtered
 
 
@@ -112,12 +114,8 @@ ReactSelector = React.createClass
     #
     _getItems: (list, filtering=false) ->
         items = []
-        special_items = []
 
-        sorted_list = [].concat(list)
-        sorted_list.sort(@props.compare)
-
-        for item, i in sorted_list
+        for item, i in list
             item_class_name = "item"
             is_active_item = @state.active_item_index == i
 
@@ -159,7 +157,7 @@ ReactSelector = React.createClass
         key = event.keyCode
         active_item_index = @state.active_item_index
         filtered = @state.filtered
-        selected = @props.selected
+        selected = @state.selected
 
         if key == ARROW_DOWN
             @_showFilteredItems()
@@ -195,7 +193,7 @@ ReactSelector = React.createClass
 
         return if query == @state.query
 
-        filtered = @_calculateFiltered(@props.universe, @props.selected, query)
+        filtered = @_calculateFiltered(@props.universe, @state.selected, query)
         active_item_index = @state.active_item_index
 
         if active_item_index >= filtered.length && filtered.length > 0
@@ -235,7 +233,7 @@ ReactSelector = React.createClass
     #
     render: ->
         filtered_items = @_getItems(@state.filtered, true)
-        selected_items = @_getItems(@props.selected)
+        selected_items = @_getItems(@state.selected)
 
         filtered_items_section =
             React.DOM.div {className: "universe"},

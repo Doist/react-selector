@@ -252,7 +252,7 @@ ReactSelector = React.createClass
                     React.DOM.input {
                         ref: "input"
                         value: @state.query
-                        placeholder: "Filter..."
+                        placeholder: @props.placeholder
                         onKeyDown: @_processActions
                         onChange: @_processQuery
                         onFocus: @_showFilteredItems

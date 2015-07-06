@@ -213,11 +213,8 @@ ReactSelector = React.createClass
     # (it is hidden by default, this should be configurable)
     #
     _showFilteredItems: ->
+        @props.onFocus() if @props.onFocus
         @setState { show_filtered_items: true }
-        # filter_list_dom = @refs.universe.getDOMNode()
-        # if filter_list_dom.className.indexOf("show") == -1
-        #     filter_list_dom.className += " show"
-
 
     #
     # on input onBlur React focus event, will hide the filter list.
@@ -226,9 +223,9 @@ ReactSelector = React.createClass
     #
     _hideFilteredItems: ->
         @_timeout = setTimeout ( =>
+            @props.onBlur() if @props.onBlur
             @setState { show_filtered_items: false }
-        ), 200
-
+        ), 0
 
     #
     #

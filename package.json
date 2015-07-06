@@ -1,6 +1,6 @@
 {
     "name": "react-selector",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "A React component that allows to filter and move item between two lists.",
     "author": "João Valente <joao@doist.io> (http://doist.io)",
     "homepage": "http://jvalente.github.io/react-selector-demo/",
